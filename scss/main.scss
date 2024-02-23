@@ -28,6 +28,7 @@ p {
 
 .hero-scene {
     position: relative;
+    margin-bottom: 15px;
 
     &::before {
         content: "";
@@ -88,4 +89,8 @@ p {
 
 .prix{
     font-weight: 800;
+}
+
+.form-label{
+    color: $primary;
 }
