@@ -11982,10 +11982,6 @@ footer.footer {
   width: 100%;
 }
 
-h3, .h3 {
-  color: #906427;
-}
-
 p {
   font-family: "Hind Madurai", serif;
   font-size: 18px;
@@ -12013,8 +12009,8 @@ p {
   height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .text-justify {
@@ -12024,7 +12020,8 @@ p {
 .image-card {
   position: relative;
 }
-.image-card:hover .titre-image {
+.image-card:hover .titre-image,
+.image-card:hover .action-image-buttons {
   opacity: 1;
 }
 .image-card:hover img {
@@ -12034,18 +12031,31 @@ p {
   transition: all 0.3s;
 }
 .image-card .titre-image {
-  opacity: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0;
   transition: all 0.3s;
 }
-
-.prix {
-  font-weight: 800;
+.image-card .action-image-buttons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: all 0.3s;
 }
 
 .form-label {
   color: #906427;
+}
+
+.allReservations a {
+  display: block;
+  color: #292222;
+  padding: 10px;
 }/*# sourceMappingURL=main.css.map */

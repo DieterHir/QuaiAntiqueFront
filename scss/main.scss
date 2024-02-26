@@ -1,96 +1,108 @@
 @import url("/node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
 
-html {
-    position: relative;
+html{
+    position:relative;
     min-height: 100%;
 }
 
-main {
+main{
     margin-bottom: 270px;
 }
 
-footer.footer {
+footer.footer{
     padding: 15px;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width:100%;
 }
 
-h3 {
-    color: $primary;
-}
-
-p {
+p{
     font-family: $font-family-serif;
     font-size: 18px;
 }
 
-.hero-scene {
+.hero-scene{
     position: relative;
     margin-bottom: 15px;
-
-    &::before {
-        content: "";
+    &::before{
+        content:"";
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
         background-image: url(../images/FondHeroScene.jpg);
         background-size: cover;
         filter: brightness(0.3);
     }
 
-    * {
-        //positionner les éléments devant le ::before
-        position: relative;
+    *{
+        //Positionner les éléments devant le ::before
+        position:relative;
     }
 
-    .hero-scene-content {
+    .hero-scene-content{
         height: 300px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
     }
 }
 
-.text-justify {
+.text-justify{
     text-align: justify;
 }
 
-.image-card {
-    position: relative;
-
-    &:hover {
-        .titre-image {
+.image-card{
+    position:relative;
+    &:hover{
+        .titre-image,
+        .action-image-buttons{
             opacity: 1;
         }
-
-        img {
+        img{
             filter: brightness(0.3);
         }
     }
 
-    img {
+    img{
         transition: all 0.3s;
     }
 
-    .titre-image {
-        opacity: 0;
+    .titre-image{
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top:50%;
+        left:50%;
         transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    .action-image-buttons{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+
+        opacity: 0;
         transition: all 0.3s;
     }
 }
 
-.prix{
-    font-weight: 800;
-}
 
 .form-label{
     color: $primary;
+}
+
+.allReservations{
+    a{
+        display: block;
+        color: $black;
+        padding: 10px;
+    }
 }
