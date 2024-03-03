@@ -22,13 +22,13 @@ const getRouteByUrl = (url) => {
 };
 
 // Fonction pour charger le contenu de la page
-const LoadContentPage = async () => {
-  const path = window.location.pathname;
+let LoadContentPage = async () => {
+  let path = window.location.pathname;
   // Récupération de l'URL actuelle
-  const actualRoute = getRouteByUrl(path);
+  let actualRoute = getRouteByUrl(path);
 
   //Vérifier les droits d'accès à la page
-  const allRolesArray = actualRoute.authorize;
+  let allRolesArray = actualRoute.authorize;
 
   if(allRolesArray.length > 0){
     if(allRolesArray.includes("disconnected")){
@@ -37,8 +37,9 @@ const LoadContentPage = async () => {
       }
     }
     else{
-      const roleUser = getRole();
+      let roleUser = getRole();
       if(!allRolesArray.includes(roleUser)){
+        alert('Vous n\'avez pas les droits d\'accès à cette page');
         window.location.replace("/");
       }
     }

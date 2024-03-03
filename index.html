@@ -30,10 +30,10 @@
                     <a class="nav-link" href="/carte">La carte</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/allResa">Les réservations</a>
+                    <a class="nav-link" href="/allResa" data-show="client">Mes réservations</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/account">Mon compte</a>
+                    <a class="nav-link" href="/account" data-show="connected">Mon compte</a>
                   </li>
                   <li class="nav-item" data-show="disconnected">
                     <a class="nav-link" href="/signin">Connexion</a>
@@ -48,6 +48,12 @@
     </header>
 
     <main id="main-page">
+      <!--Ajout d'un loader pour fluidifier le chargement de la page en cas de longueur-->
+      <div class="loader-container">
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+        <div class="dot d3"></div>
+      </div>
         <!-- Le contenu de la page sera injectée ici-->
     </main>
 
