@@ -6,7 +6,6 @@ btnSingin.addEventListener("click", checkCredentials);
 
 function checkCredentials(){
     //Ici, il faudra appeler l'API pour vérifier les credentials en BDD
-    
     if(mailInput.value == "test@mail.com" && passwordInput.value == "123"){
         //Il faudra récupérer le vrai token
         let token = "lkjsdngfljsqdnglkjsdbglkjqskjgkfjgbqslkfdgbskldfgdfgsdgf";

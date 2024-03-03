@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="text-center" data-show="admin">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EditionPhotoModal">Ajouter une
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjoutPhotoModal">Ajouter une
       photo</button>
   </div>
   <div class="row row-cols-2 row-cols-lg-3" id="allImages">
@@ -28,6 +28,33 @@
   </div>
 </div>
 
+<!--Ajout modal-->
+<div class="modal fade" id="AjoutPhotoModal" tabindex="-1" aria-labelledby="AjoutPhotoModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="AjoutPhotoModalLabel">Ajout d'une photo</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="NamePhotoInput" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="NameAddInput" placeholder="Lasagnes à la bolognese">
+          </div>
+          <div class="mb-3">
+            <label for="ImageInput" class="form-label">Image</label>
+            <input type="file" class="form-control" id="ImageInput">
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary" id="btn-add">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal edition -->
 <div class="modal fade" id="EditionPhotoModal" tabindex="-1" aria-labelledby="EditionPhotoModalLabel"
@@ -42,14 +69,14 @@
         <form>
           <div class="mb-3">
             <label for="NamePhotoInput" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="NamePhotoInput" placeholder="Lasagnes à la bolognese">
+            <input type="text" class="form-control" id="NameEditInput" placeholder="Lasagnes à la bolognese">
           </div>
           <div class="mb-3">
             <label for="ImageInput" class="form-label">Image</label>
             <input type="file" class="form-control" id="ImageInput">
           </div>
           <div class="text-center">
-            <button type="button" class="btn btn-primary">Enregistrer</button>
+            <button type="button" class="btn btn-primary" id="btn-edit">Enregistrer</button>
           </div>
         </form>
       </div>
