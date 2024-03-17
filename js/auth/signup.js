@@ -4,12 +4,14 @@ let inputMail = document.getElementById("EmailInput");
 let inputPassword = document.getElementById("PasswordInput");
 let inputValidationPassword = document.getElementById("ValidatePasswordInput");
 let btnValidation = document.getElementById("btn-validation-inscription")
+let formInscription = document.getElementById("formulaireInscription");
 
 inputNom.addEventListener("keyup", validateForm);
 inputPrenom.addEventListener("keyup", validateForm);
 inputMail.addEventListener("keyup", validateForm);
 inputPassword.addEventListener("keyup", validateForm);
 inputValidationPassword.addEventListener("keyup", validateForm);
+btnValidation.addEventListener("click", inscrireUtilisateur);
 
 function validateForm() {
     let nomOk = validateRequired(inputNom);
@@ -80,4 +82,41 @@ function validateConfirmationPassword(inputPwd, inputConfirmPwd) {
         inputConfirmPwd.classList.remove("is-valid");
         return false;
     }
+}
+
+function inscrireUtilisateur() {
+    let dataForm = new FormData(formInscription)
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = JSON.stringify({
+        "firstName": dataForm.get("nom"),
+        "lastName": dataForm.get("prenom"),
+        "email": dataForm.get("email"),
+        "password": dataForm.get("mdp")
+    });
+
+    let requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch(apiUrl+"registration", requestOptions)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            else {
+                alert("Erreur lors de l'inscription.");
+            }
+        })
+        .then((result) => {
+            alert("Bravo " + dataForm.get("prenom") + ", vous êtes bien inscrit. Vous pouvez vous connecter.");
+            document.location.href = "/signin";
+            console.log(result)
+        })
+        .catch((error) => console.error(error));
 }

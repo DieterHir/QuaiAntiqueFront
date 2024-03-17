@@ -9,19 +9,8 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AjoutPhotoModal">Ajouter une
       photo</button>
   </div>
-  <div class="row row-cols-2 row-cols-lg-3" id="allImages">
-    <div class="col p-3">
-      <div class="image-card text-white">
-        <img src="../images/food.jpg" class="rounded w-100">
-        <p class="titre-image">Titre</p>
-        <div class="action-image-buttons" data-show="admin">
-          <button class="btn btn-outline-light" type="button" data-bs-toggle="modal"
-            data-bs-target="#EditionPhotoModal"><i class="bi bi-pencil-square"></i></button>
-          <button class="btn btn-outline-light" type="button" data-bs-toggle="modal"
-            data-bs-target="#DeletePhotoModal"><i class="bi bi-trash"></i></button>
-        </div>
-      </div>
-    </div>
+  <div id="content">
+
   </div>
   <div class="text-center">
     <a href="/reserver" class="btn btn-primary">Réserver</a>
@@ -29,8 +18,7 @@
 </div>
 
 <!--Ajout modal-->
-<div class="modal fade" id="AjoutPhotoModal" tabindex="-1" aria-labelledby="AjoutPhotoModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="AjoutPhotoModal" tabindex="-1" aria-labelledby="AjoutPhotoModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -38,14 +26,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="formAdd">
           <div class="mb-3">
             <label for="NamePhotoInput" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="NameAddInput" placeholder="Lasagnes à la bolognese">
+            <input type="text" class="form-control" id="NameAddInput" placeholder="Lasagnes à la bolognese" name="title">
           </div>
           <div class="mb-3">
             <label for="ImageInput" class="form-label">Image</label>
-            <input type="file" class="form-control" id="ImageInput">
+            <input type="file" class="form-control" id="ImageInput" name="img">
           </div>
           <div class="text-center">
             <button type="button" class="btn btn-primary" id="btn-add">Enregistrer</button>
