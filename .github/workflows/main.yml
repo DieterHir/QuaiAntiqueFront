@@ -28,5 +28,5 @@ jobs:
                 **/.git*/**
                 **/node_modules/bootstrap/scss/**
                 **/node_modules/bootstrap/js/**
-                **/node_modules/bootstrap-icones/icons/**
+                **/node_modules/bootstrap-icons/icons/**
 
