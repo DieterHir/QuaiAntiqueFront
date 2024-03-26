@@ -15,9 +15,10 @@ jobs:
         username: quaiantique223
         password: ${{ secrets.ftp_password }}
         server-dir: /www/
-        exclude:
-        **/.git*
-        **/.git*/**
-        **/node_modules/bootstrap/scss/**
-        **/node_modules/bootstrap/js/**
-        **/nomde_modules/bootstrap-icones/icons/**
+        exclude: |
+                **/.git*
+                **/.git*/**
+                **/node_modules/bootstrap/scss/**
+                **/node_modules/bootstrap/js/**
+                **/nomde_modules/bootstrap-icones/icons/**
+
