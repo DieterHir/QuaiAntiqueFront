@@ -7,13 +7,15 @@ btnSingin.addEventListener("click", checkCredentials);
 
 function checkCredentials() {
     let dataForm = new FormData(signinForm);
+    let username = sanitizeHtml(dataForm.get("email"));
+    let password = sanitizeHtml(dataForm.get("mdp"));
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     let raw = JSON.stringify({
-        "username": dataForm.get("email"),
-        "password": dataForm.get("mdp")
+        "username": username,
+        "password": password,
     });
 
     let requestOptions = {

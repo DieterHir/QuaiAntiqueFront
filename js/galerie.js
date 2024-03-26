@@ -1,14 +1,19 @@
+let galerie = [];
+let selectedPicture = [];
 let nomAddInput = document.getElementById('NameAddInput');
 let nomEditInput = document.getElementById('NameEditInput');
 let btnAdd = document.getElementById('btn-add');
 let btnEdit = document.getElementById('btn-edit');
-let content = document.getElementById('content');
+let content = document.getElementById('allImages');
 let form = document.getElementById('formAdd');
-let galerie = [];
+let formEdit = document.getElementById('formEditPic');
+let btnDelete = document.getElementById('btn-delete');
 
-nomAddInput.addEventListener("keyup", validateAddForm);
+// nomAddInput.addEventListener("keyup", validateAddForm);
 nomEditInput.addEventListener("keyup", validateEditForm);
 btnAdd.addEventListener("click", addPicture);
+btnEdit.addEventListener("click", editPicture);
+btnDelete.addEventListener("click", deletePicture);
 
 function validateAddForm() {
     let nameAddOk = validateRequired(nomAddInput);
@@ -45,13 +50,18 @@ function validateRequired(input) {
 function addPicture() {
     let dataForm = new FormData(form);
 
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    console.log(dataForm);
 
-    let raw = JSON.stringify({
-        "Title": dataForm.get("title"),
-        "Slug": dataForm.get("img"),
-    })
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type","multipart/form-data")
+    // myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("X-AUTH-TOKEN", getToken());
+
+    // let raw = JSON.stringify({
+    //     "Title": dataForm.get("title"),
+    //     "Slug": dataForm.get("img").name,
+    //     "Restaurant": 8,
+    // });
 
     let requestOptions = {
         method: 'POST',
@@ -59,7 +69,7 @@ function addPicture() {
         body: raw,
     };
 
-    fetch(apiUrl+"picture", requestOptions)
+    fetch(apiUrl + "picture", requestOptions)
         .then(response => {
             if (response.ok) {
                 getGalerie();
@@ -73,14 +83,13 @@ function addPicture() {
 function getGalerie() {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("X-AUTH-TOKEN", getToken());
 
     let requestOptions = {
         method: 'GET',
         headers: myHeaders,
     };
 
-    fetch(apiUrl+"galerie", requestOptions)
+    fetch(apiUrl + "picture", requestOptions)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -100,19 +109,82 @@ function displayGalerie() {
 
     for (let image of galerie) {
         content.innerHTML += `
-        <div class="row row-cols-2 row-cols-lg-3" id = "allImages" >
-            <div class="col p-3">
+            <div class="p-3">            
                 <div class="image-card text-white">
                     <img src="../images/${image.slug}" class="rounded w-100">
-                        <p class="titre-image">Titre</p>
+                        <p class="titre-image">${image.title}</p>
                         <div class="action-image-buttons" data-show="admin">
                             <button class="btn btn-outline-light" type="button" data-bs-toggle="modal"
-                                data-bs-target="#EditionPhotoModal" data-id=${image.id}><i class="bi bi-pencil-square"></i></button>
+                                data-bs-target="#EditionPhotoModal" data-id=${image.id} onclick="findSelectedPicture(${image.id})"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-outline-light" type="button" data-bs-toggle="modal"
-                                data-bs-target="#DeletePhotoModal" data-id=${image.id}><i class="bi bi-trash"></i></button>
+                                data-bs-target="#DeletePhotoModal" data-id=${image.id} onclick="findSelectedPicture(${image.id})"><i class="bi bi-trash"></i></button>
                         </div>
                 </div>
             </div>
-        </div >`
+`
     }
+    showAndHideElementsForRoles();
+    // hideLoader();
 }
+
+function editPicture() {
+
+    let dataForm = new FormData(formEdit);
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("X-AUTH-TOKEN", getToken());
+
+    let raw = JSON.stringify({
+        "Title": dataForm.get("title"),
+        "Slug": dataForm.get('img').name,
+        "id": selectedPicture.id,
+    });
+
+    let requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+    };
+
+    fetch(apiUrl + "picture/" + selectedPicture.id, requestOptions)
+        .then(response => {
+            if (response.ok) {
+                getGalerie();
+            } else {
+                alert("Une erreur est survenue lors de l'édition de l'image");
+            }
+        });
+}
+
+function deletePicture() {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("X-AUTH-TOKEN", getToken());
+
+    let raw = JSON.stringify({
+        "id": selectedPicture.id,
+    });
+
+    let requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: raw,
+    };
+
+    fetch(apiUrl + "picture/" + selectedPicture.id, requestOptions)
+        .then(response => {
+            if (response.ok) {
+                getGalerie();
+            } else {
+                alert("Erreur lors de la suppression de l'élément");
+            }
+        });
+}
+
+function findSelectedPicture(id) {
+    selectedPicture = galerie.find((picture) => picture.id == id)
+}
+
+showAndHideElementsForRoles();
+getGalerie();

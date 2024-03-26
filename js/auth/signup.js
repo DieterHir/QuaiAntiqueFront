@@ -86,15 +86,19 @@ function validateConfirmationPassword(inputPwd, inputConfirmPwd) {
 
 function inscrireUtilisateur() {
     let dataForm = new FormData(formInscription)
+    let prenom = sanitizeHtml(dataForm.get("prenom"));
+    let nom = sanitizeHtml(dataForm.get("nom"));
+    let email = sanitizeHtml(dataForm.get("email"));
+    let password = sanitizeHtml(dataForm.get("mdp"));
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     let raw = JSON.stringify({
-        "firstName": dataForm.get("nom"),
-        "lastName": dataForm.get("prenom"),
-        "email": dataForm.get("email"),
-        "password": dataForm.get("mdp")
+        "firstName": nom,
+        "lastName": prenom,
+        "email": email,
+        "password": password,
     });
 
     let requestOptions = {
@@ -114,7 +118,7 @@ function inscrireUtilisateur() {
             }
         })
         .then((result) => {
-            alert("Bravo " + dataForm.get("prenom") + ", vous êtes bien inscrit. Vous pouvez vous connecter.");
+            alert("Bravo " + prenom + ", vous êtes bien inscrit. Vous pouvez vous connecter.");
             document.location.href = "/signin";
             console.log(result)
         })
